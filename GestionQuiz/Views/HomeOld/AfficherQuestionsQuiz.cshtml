@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "AfficherQuestionsQuiz";
+}
+
+@{
+    TempData["IdQuiz"] = "" + ViewBag.IdQuiz;
+    TempData["UserName"] = ViewBag.UserName;
+}
+
+
+<form id="QuizFormPasser" asp-action="SubmitQuiz" class="container bg-info" >
+
+    <div class="container text-left mt-1 mb-5">
+        <div>
+            <h1 class="text-center"> Quiz numéro @ViewBag.IdQuiz de @ViewBag.UserName</h1>
+        </div>
+        @foreach (var question in ViewBag.Questions)
+        {
+            <div class="row justify-content-left mt-3 mb-2">
+                <div class="col-8" style="margin-left:150px">
+                    <h3>
+                        @question.Text
+                        <input type="hidden" name="QuestionId" value="@question.QuestionId" />
+                    </h3>
+                    <div class="p-2">
+                        @foreach (var option in question.ItemOption)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Question_@question.QuestionId" value="@option.OptionId" required>
+                                <label class="form-check-label">
+                                    @option.Text
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="form-group p-5">
+            <input type="submit" id="btnSoumettre" value="Soumettre" class="btn btn-primary" />
+            <input type="reset" value="Annuler" onClick="history.go(-1); return false;" class="btn btn-primary" />
+        </div>
+    </div>
+
+</form>
+    <div>
+        <a asp-action="Index">Retourner au menu principal</a>
+    </div>
+    

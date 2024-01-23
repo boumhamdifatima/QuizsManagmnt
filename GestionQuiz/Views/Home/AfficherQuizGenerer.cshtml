@@ -1,0 +1,51 @@
+﻿@model IEnumerable<GestionQuiz.Models.Quiz>
+
+@{
+    ViewData["Title"] = "AfficherQuizGenerer";
+}
+<div style="background-color:aliceblue; margin :0 auto;height:auto; width:700px; margin-top:50px">
+    <h3 style="color: green; text-align: center;">1.Trouver les quiz d'un utilisateur</h3>
+
+
+    <form method="get" action="/Home/AfficherQuizGenerer">
+        <div>
+           
+            <input type="text" id="username" name="username" placeholder="alex123" size="50" style="margin-bottom:20px; margin-left:150px" required>
+        </div>
+        <div>
+            
+            <input type="email" id="email" name="email" size="50" placeholder="alex@gmail.com" style=" margin-left:150px" required>
+        </div>
+        <button type="submit" style="margin :0 auto; background-color:orange ; color:red; margin-left:330px ; margin-top:20px">Trouver</button>
+
+    </form>
+
+
+  
+    <h3 style="color: blue;  margin-left:200px">2. Choisir un quiz </h3>
+    <h4 style="color: green; margin-left: 150px; font-size: 14px">@ViewBag.message</h4>
+    @if (Model != null)
+    {
+        <table class="table" style="border:1px solid gray ; width:300px; margin-left:220px;margin-bottom:20px">
+
+            @foreach (var item in Model)
+            {
+
+                <tr style="background-color:dodgerblue; color:white; font-size:14px; font-weight:bold; margin-bottom:10px">
+                    <td >
+                        
+
+                        <a href="@Url.Action("PasserQuizQuestions", new { IdQuiz = item.QuizId, UserName = item.UserName  })" >Quiz @Html.DisplayFor(modelItem => item.QuizId)</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }<div>
+    <a asp-action="Index">Retourner au menu principal</a>
+</div>
+    @*<div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2" style="background-color: blue;width: 90px;margin-left: 230px;">Passer</button>
+        <button type="submit" class="btn btn-primary mb-2" style="background-color: gray;width: 90px;">Annuler</button>
+    </div>*@
+
+</div>

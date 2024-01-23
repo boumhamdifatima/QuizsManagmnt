@@ -1,0 +1,75 @@
+﻿
+
+@{
+    ViewData["Title"] = "Reviser Quiz";
+}
+
+<style>
+    .changeColorRed {
+        background-color: rgba(255,0,0,0.3);
+    }
+    .changeColorGreen {
+        background-color: rgba(0,255,0,0.3);
+    }
+</style>
+<form class="container pb-3">
+
+    <div class="container text-left mt-1 mb-5">
+        <div class="text-center">
+            <h1 class="text-primary"> Quiz numéro @ViewBag.IdQuiz de @ViewBag.UserName</h1>
+            <h1 class="text-success">@ViewBag.Score</h1>
+        </div>
+        @foreach (var question in ViewBag.Questions)
+        {
+            bool isUserAnswer;
+            string bgColorSpan;
+            <div class="row justify-content-left mt-3 mb-2">
+                <div class="col-8" style="margin-left:150px">
+                    <h3>
+                        @question.Text
+                        <input type="hidden" name="QuestionId" value="@question.QuestionId" />
+                    </h3>
+                    <div style="border:1px solid blue">
+                        @foreach (var option in question.ItemOption)
+                        {
+                            isUserAnswer = false;
+                            foreach (var answer in ViewBag.Reponses)
+                            {
+                                if (option.OptionId == answer.OptionId)
+                                {
+                                    isUserAnswer = true;
+                                }
+                            }
+                            bgColorSpan = "";
+                            if (option.IsRight)
+                            {
+                                bgColorSpan = "changeColorGreen";
+                            }
+                            else if (isUserAnswer)
+                            {
+                                bgColorSpan = "changeColorRed";
+                            }
+
+                            <div class="form-check @bgColorSpan">
+                                <div>
+                                    <input class="form-check-input" type="radio" name="Question_@question.QuestionId" value="@option.OptionId" checked="@isUserAnswer" step="@option.IsRight">
+                                    <label class="form-check-label">
+                                        @option.Text
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+               
+            </div>
+        }
+    </div>
+  
+
+</form>
+<div class="text-center mt-2">
+    <button class="btn-primary ps-m-5 pe-5" style="width:80px"><a asp-action="Index" class="text-light">Retour</a></button>
+</div>
+
+

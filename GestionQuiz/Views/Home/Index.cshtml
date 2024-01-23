@@ -1,0 +1,31 @@
+﻿@{
+        ViewData["Title"] = "Index";
+ }
+
+
+<div class="container text-center mt-1 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h1 class="display-4 pb-5 text-primary">Application de Gestion Quiz </h1>
+        </div>
+    </div>
+</div>
+@{
+    <div class="container text-center mt-3">
+        <div class="row justify-content-center p-2 mb-2">
+            <div class="col-6 list-group-item list-group-item-action list-group-item-primary">
+                @Html.ActionLink("Générer un nouveau quiz", "CreerQuiz", new {/**/ })
+            </div>
+        </div>
+        <div class="row justify-content-center p-2 mb-2">
+            <div class="col-6 list-group-item list-group-item-action list-group-item-primary">
+                @Html.ActionLink("Passer un quiz", "AfficherQuizGenerer", new {/**/ })
+            </div>
+        </div>
+        <div class="row justify-content-center p-2">
+            <div class="col-6 list-group-item list-group-item-action list-group-item-primary">
+                @Html.ActionLink("Réviser un quiz", "ReviserUnQuiz", new {/**/ })
+            </div>
+        </div>
+    </div>
+}

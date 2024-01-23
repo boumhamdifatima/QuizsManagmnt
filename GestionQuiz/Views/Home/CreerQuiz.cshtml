@@ -1,0 +1,95 @@
+﻿@model GestionQuiz.Models.Quiz
+
+<h4>Génerer un nouveau Quiz</h4>
+<hr />
+
+<form asp-action="CreerQuiz" class="container  text-center mt-1 mb-5 bg-info">
+    <div class="container  text-center mt-1 mb-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row justify-content-center mt-3 mb-2">
+            <div class="col-6">
+                <div class="input-group pt-5 mb-1">
+                    <span class="input-group-text"><i class="fas fa-user cc-icolor"></i></span>
+                    <input type="text" asp-for="UserName" class="form-control" placeholder="Alex 123" size="25">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control mb-2" placeholder="Alex 123" size="40" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>*@
+            </div>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-at cc-icolor"></i></span>
+                    <input type="email" asp-for="Email" class="form-control" placeholder="AlexGmail.com">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @*<div class="form-group mb-2">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control mb-2" placeholder="AlexGmail.com" size="40" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                *@
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2 fw-bold">
+            <div class="col-6">
+                <table class="table">
+                    <tbody>
+                        @foreach (var item in (TempData["Category"] as List<Category>))
+                        {
+                            <tr class="mt-3 p-2 text-left">
+                                <td>
+                                    <label name=@item.Description class="control-label">Nombre de questions de type : <span class=" fw-bold text-uppercase text-light">@item.Description</span> </label>
+
+                                </td>
+                                <td>
+                                    <input type="number" name=@item.Description class="form-control" size="8" min="0" max="10" />
+
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Générer" class="btn btn-primary" />
+                    <input type="reset" value="Annuler" onClick="history.go(-1); return false;" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3 mb-2">
+            <div class="col-6">
+                <div class="mb-3">
+                    @if (ViewBag.QuizCree != null)
+                    {
+                        if (ViewBag.QuizCree!)
+                        {
+                            <p class="text-success bg-light p-3 mb-5">@ViewBag.MsgGenereQuiz</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger bg-light p-3 mb-5">@ViewBag.MsgGenereQuiz</p>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div>
+    <a asp-action="Index">Retourner au menu principal</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
