@@ -6,7 +6,7 @@ Generate a new quiz.
 
 Take a given quiz and save the result. 
 
-Review the grade obtained.
+Review the obtained grade.
 
 ## ARTISANA Description
 
